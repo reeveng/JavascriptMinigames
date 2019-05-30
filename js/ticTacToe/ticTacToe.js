@@ -166,14 +166,14 @@ const init = () => {
   let divBody = document.getElementById("body");
 
   let divScore = document.createElement("div");
-  // let Element = document.createElement("div");
-  // players.forEach(player => {
-  //   let scoreText = document.createTextNode(
-  //     `The score of ${player.name} = ${player.score}`
-  //   );
-  //   pElement.append(scoreText);
-  // });
-  // divScore.append(pElement);
+  let pElement = document.createElement("div");
+  players.forEach(player => {
+    let scoreText = document.createTextNode(
+      `The score of ${player.name} = ${player.score}`
+    );
+    pElement.append(scoreText);
+  });
+  divScore.append(pElement);
   divBody.append(divScore);
 
   // console.table(game.board);
