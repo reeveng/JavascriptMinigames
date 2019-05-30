@@ -12,6 +12,7 @@ class Player {
   constructor(name, symbol) {
     this._name = name;
     this._symbol = symbol;
+    this._score = 0;
   }
   //setters
   set name(value) {
@@ -20,6 +21,10 @@ class Player {
   set symbol(value) {
     this._symbol = value;
   }
+  set score(value) {
+    this._score = value;
+  }
+
   //getters
   get symbol() {
     return this._symbol;
@@ -27,13 +32,16 @@ class Player {
   get name() {
     return this._name;
   }
+  get score() {
+    return this._score;
+  }
 }
 
 class TicTacToe {
   constructor(player1, player2) {
     this._player1 = player1;
     this._player2 = player2;
-    this._board = [["h", "e", "y"], ["b", "e", "n"], ["j", "i", "j"]];
+    this._board = [["", "", ""], ["", "", ""], ["", "", ""]];
   }
   //setters
   set board(value) {
@@ -45,6 +53,7 @@ class TicTacToe {
   set player1(value) {
     this._player1 = value;
   }
+
   //getters
   get player1() {
     return this._player1;
@@ -57,35 +66,117 @@ class TicTacToe {
   }
 
   hasWon() {
-    // 0,1,2
-    //,3,4,5
-    //,6,7,8
     let row = [];
     let column = [];
+    let diagonalArray1 = [];
+    let diagonalArray2 = [];
+    let p1 = null,
+      p2 = null;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-
-        //console.log(this._board[j][i]);
-        console.log(this._board[i][j]);
+        row[j] = this._board[i][j];
+        column[j] = this._board[j][i];
       }
-      console.log("spank me baby");
+
+      p1 = checkWithArrayIfGameWon(row, this._player1, this._player2);
+      p2 = checkWithArrayIfGameWon(column, this._player1, this._player2);
+      if (p1 != null) {
+        return p1;
+      }
+      if (p2 != null) {
+        return p2;
+      }
+    }
+    diagonalArray1[0] = this._board[0][0];
+    diagonalArray1[1] = this._board[1][1];
+    diagonalArray1[2] = this._board[2][2];
+    p1 = checkWithArrayIfGameWon(diagonalArray1, this._player1, this._player2);
+    diagonalArray2[0] = this._board[0][2];
+    diagonalArray2[1] = this._board[1][1];
+    diagonalArray2[2] = this._board[2][0];
+    p2 = checkWithArrayIfGameWon(diagonalArray2, this._player1, this._player2);
+    if (p1 != null) {
+      return p1;
+    }
+    if (p2 != null) {
+      return p2;
     }
   }
 
-  //   gameOver = function() {
-  //     board.forEach(item => {
-  //       if (item != "") {
-  //       }
-  //     });
-  //   };
+  gameOver() {
+    let player = this.hasWon();
+    if (player != null) {
+      alert(`${player.name} is the winner!`);
+      player.score++;
+    } else if (this.isEqual()) {
+      alert(`Sadly this game is a draw!`);
+    } else {
+    }
+  }
+
+  isEqual() {
+    let output = true;
+    for (let i = 0; i < 3; i++) {
+      this._board[i].forEach(element => {
+        if (element == "" || element == null) {
+          output = false;
+        }
+      });
+    }
+    return output;
+  }
 }
 
-// let player1;
-// let player2;
+function checkIfPlayerWon(array, symbol) {
+  let output = false;
+  if (array[1] == symbol && array[2] == symbol) {
+    output = true;
+  }
+  return output;
+}
+
+function checkWithArrayIfGameWon(array, player1, player2) {
+  let player = null;
+  let won = false;
+  player = checkFirstPlayerInArray(array, player1, player2);
+  if (player != null) {
+    won = checkIfPlayerWon(array, player.symbol);
+    if (won) {
+      return player;
+    }
+  }
+}
+
+function checkFirstPlayerInArray(array, player1, player2) {
+  let playerSymbol = null;
+  if (array[0] == player1.symbol) {
+    return player1;
+  } else if (array[0] == player2.symbol) {
+    return player2;
+  } else {
+    return playerSymbol;
+  }
+}
 
 const init = () => {
-  const game = new TicTacToe();
-  console.table(game.board);
-  game.hasWon();
+  const player1 = new Player("sterre", "X");
+  const player2 = new Player("reeven", "O");
+  const game = new TicTacToe(player1, player2);
+  const players = [player1, player2];
+  let divBody = document.getElementById("body");
+
+  let divScore = document.createElement("div");
+  // let Element = document.createElement("div");
+  // players.forEach(player => {
+  //   let scoreText = document.createTextNode(
+  //     `The score of ${player.name} = ${player.score}`
+  //   );
+  //   pElement.append(scoreText);
+  // });
+  // divScore.append(pElement);
+  divBody.append(divScore);
+
+  // console.table(game.board);
+  // game.gameOver();
 };
 window.onload = init;
