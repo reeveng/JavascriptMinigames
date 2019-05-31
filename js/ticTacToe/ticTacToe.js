@@ -41,7 +41,7 @@ class TicTacToe {
   constructor(player1, player2) {
     this._player1 = player1;
     this._player2 = player2;
-    this._board = [["", "", ""], ["", "", ""], ["", "", ""]];
+    this._board = [["h", "e", "y"], ["b", "e", "n"], ["j", "i", "j"]];
   }
   //setters
   set board(value) {
@@ -158,6 +158,12 @@ function checkFirstPlayerInArray(array, player1, player2) {
   }
 }
 
+function setAttributes(element, arrayOfAttributes) {
+  for (var key in arrayOfAttributes) {
+    element.setAttribute(key, arrayOfAttributes[key]);
+  }
+}
+
 class TicTacToeComponent {
   constructor(window, player1, player2) {
     this._storage = window.localStorage;
@@ -180,30 +186,34 @@ class TicTacToeComponent {
 
   boardToHtml() {
     document.getElementById("body").innerHTML = "";
-
+    let divBody = document.getElementById("body");
+    divBody.setAttribute("class", "is-dark container")
     // is-ancestor element
-    let divTileAncestor = document.createElement("div");
+    const divTileAncestor = document.createElement("div");
     divTileAncestor.setAttribute("class", "tile is-ancestor");
 
     //column1
-    let divTileCol0 = document.createElement("div");
+    const divTileCol0 = document.createElement("div");
     divTileCol0.setAttribute("class", "tile is-4 is-vertical is-parent");
 
     //row1
-    let divTileCol0Row0 = document.createElement("div");
+    const divTileCol0Row0 = document.createElement("div");
     divTileCol0Row0.setAttribute("class", "tile is-child box");
-    let pCol0Row0 = document.createElement("p");
-    pCol0Row0.setAttribute("class", "");
+    const pCol0Row0 = document.createElement("p");
+    pCol0Row0.setAttribute("class", "has-text-centered");
+    pCol0Row0.appendChild(document.createTextNode(`${this._game.board[0][0]}`));
     //row2
-    let divTileCol0Row1 = document.createElement("div");
+    const divTileCol0Row1 = document.createElement("div");
     divTileCol0Row1.setAttribute("class", "tile is-child box");
-    let pCol0Row1 = document.createElement("p");
-    pCol0Row1.setAttribute("class", "");
+    const pCol0Row1 = document.createElement("p");
+    pCol0Row1.setAttribute("class", "has-text-centered");
+    pCol0Row1.appendChild(document.createTextNode(`${this._game.board[1][0]}`));
     //row3
-    let divTileCol0Row2 = document.createElement("div");
+    const divTileCol0Row2 = document.createElement("div");
     divTileCol0Row2.setAttribute("class", "tile is-child box");
-    let pCol0Row2 = document.createElement("p");
-    pCol0Row2.setAttribute("class", "");
+    const pCol0Row2 = document.createElement("p");
+    pCol0Row2.setAttribute("class", "has-text-centered");
+    pCol0Row2.appendChild(document.createTextNode(`${this._game.board[2][0]}`));
 
     divTileCol0Row0.appendChild(pCol0Row0);
     divTileCol0Row1.appendChild(pCol0Row1);
@@ -211,58 +221,61 @@ class TicTacToeComponent {
 
     //
     //column2
-    let divTileCol1 = document.createElement("div");
+    const divTileCol1 = document.createElement("div");
     divTileCol1.setAttribute("class", "tile is-4 is-vertical is-parent");
 
     //row1
-    let divTileCol1Row0 = document.createElement("div");
+    const divTileCol1Row0 = document.createElement("div");
     divTileCol1Row0.setAttribute("class", "tile is-child box");
-    let pCol1Row0 = document.createElement("p");
-    pCol1Row0.setAttribute("class", "");
+    const pCol1Row0 = document.createElement("p");
+    pCol1Row0.setAttribute("class", "has-text-centered");
+    pCol1Row0.appendChild(document.createTextNode(`${this._game.board[0][1]}`));
     //row2
-    let divTileCol1Row1 = document.createElement("div");
+    const divTileCol1Row1 = document.createElement("div");
     divTileCol1Row1.setAttribute("class", "tile is-child box");
-    let pCol1Row1 = document.createElement("p");
-    pCol1Row1.setAttribute("class", "");
+    const pCol1Row1 = document.createElement("p");
+    pCol1Row1.setAttribute("class", "has-text-centered");
+    pCol1Row1.appendChild(document.createTextNode(`${this._game.board[1][1]}`));
     //row3
-    let divTileCol1Row2 = document.createElement("div");
+    const divTileCol1Row2 = document.createElement("div");
     divTileCol1Row2.setAttribute("class", "tile is-child box");
-    let pCol1Row2 = document.createElement("p");
-    pCol1Row2.setAttribute("class", "");
-
-    //column3
-    let divTileCol2 = document.createElement("div");
-    divTileCol2.setAttribute("class", "tile is-4 is-vertical is-parent");
-
-    //row1
-    let divTileCol2Row0 = document.createElement("div");
-    divTileCol2Row0.setAttribute("class", "tile is-child box");
-    let pCol2Row0 = document.createElement("p");
-    pCol2Row0.setAttribute("class", "");
-    //row2
-    let divTileCol2Row1 = document.createElement("div");
-    divTileCol2Row1.setAttribute("class", "tile is-child box");
-    let pCol2Row1 = document.createElement("p");
-    pCol2Row1.setAttribute("class", "");
-    //row3
-    let divTileCol2Row2 = document.createElement("div");
-    divTileCol2Row2.setAttribute("class", "tile is-child box");
-    let pCol2Row2 = document.createElement("p");
-    pCol2Row2.setAttribute("class", "");
-
-    //connecting all the divs and p elements
-    divTileCol0Row0.appendChild(pCol0Row0);
-    divTileCol0Row1.appendChild(pCol0Row1);
-    divTileCol0Row2.appendChild(pCol0Row2);
+    const pCol1Row2 = document.createElement("p");
+    pCol1Row2.setAttribute("class", "has-text-centered");
+    pCol1Row2.appendChild(document.createTextNode(`${this._game.board[2][1]}`));
 
     divTileCol1Row0.appendChild(pCol1Row0);
     divTileCol1Row1.appendChild(pCol1Row1);
     divTileCol1Row2.appendChild(pCol1Row2);
 
+    //
+    //column3
+    const divTileCol2 = document.createElement("div");
+    divTileCol2.setAttribute("class", "tile is-4 is-vertical is-parent");
+
+    //row1
+    const divTileCol2Row0 = document.createElement("div");
+    divTileCol2Row0.setAttribute("class", "tile is-child box");
+    const pCol2Row0 = document.createElement("p");
+    pCol2Row0.setAttribute("class", "has-text-centered");
+    pCol2Row0.appendChild(document.createTextNode(`${this._game.board[0][2]}`));
+    //row2
+    const divTileCol2Row1 = document.createElement("div");
+    divTileCol2Row1.setAttribute("class", "tile is-child box");
+    const pCol2Row1 = document.createElement("p");
+    pCol2Row1.setAttribute("class", "has-text-centered");
+    pCol2Row1.appendChild(document.createTextNode(`${this._game.board[1][2]}`));
+    //row3
+    const divTileCol2Row2 = document.createElement("div");
+    divTileCol2Row2.setAttribute("class", "tile is-child box");
+    const pCol2Row2 = document.createElement("p");
+    pCol2Row2.setAttribute("class", "has-text-centered");
+    pCol2Row2.appendChild(document.createTextNode(`${this._game.board[2][2]}`));
+
     divTileCol2Row0.appendChild(pCol2Row0);
     divTileCol2Row1.appendChild(pCol2Row1);
     divTileCol2Row2.appendChild(pCol2Row2);
 
+    //connecting all the divs and p elements
     divTileCol0.appendChild(divTileCol0Row0);
     divTileCol0.appendChild(divTileCol0Row1);
     divTileCol0.appendChild(divTileCol0Row2);
