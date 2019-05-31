@@ -158,24 +158,156 @@ function checkFirstPlayerInArray(array, player1, player2) {
   }
 }
 
+class TicTacToeComponent {
+  constructor(window, player1, player2) {
+    this._storage = window.localStorage;
+    this._game = new TicTacToe(player1, player2);
+  }
+  get storage() {
+    return this._storage;
+  }
+  set storage(value) {
+    this._storage = value;
+  }
+  // const players = [player1, player2];
+  // let divBody = document.getElementById("body");
+
+  // let divScore = document.createElement("div");
+  // let pElement = document.createElement("div");
+  // players.forEach(player => {
+  //   let scoreText = document.createTextNode(
+  //     `The score of ${player.name} = ${player.score}`
+  //   );
+  //   pElement.appendChild(scoreText);
+  // });
+  // divScore.append(pElement);
+  // divBody.append(divScore);
+  boardToHtml() {
+    document.getElementById("body").innerHTML = "";
+
+    // generates for each row a div with a columns attribute
+    // and for each element in that row a div with a is-one-third attribute
+    //
+    // this._game.board.forEach(row => {
+    //   const divElementRow1 = document.createElement("div");
+    //   divElementRow1.setAttribute("class", "tile is-parent");
+    //   row.forEach(element => {
+    //     const divElementRow1Column1 = document.createElement("article");
+    //     divElementRow1Column1.setAttribute("class", "tile is-child notification is-warning");
+    //     divElementRow1Column1.appendChild(document.createTextNode("X"))
+    //     divElementRow1.appendChild(divElementRow1Column1);
+    //   });
+    //   document.getElementById("body").appendChild(divElementRow1);
+    // });
+
+    // is-ancestor element
+    let divTileAncestor = document.createElement("div");
+    divTileAncestor.setAttribute("class", "tile is-ancestor");
+
+    //column1
+    let divTileCol0 = document.createElement("div");
+    divTileCol0.setAttribute("class", "tile is-4 is-vertical is-parent");
+
+    //row1
+    let divTileCol0Row0 = document.createElement("div");
+    divTileCol0Row0.setAttribute("class", "tile is-child box");
+    let pCol0Row0 = document.createElement("p");
+    pCol0Row0.setAttribute("class", "");
+    //row2
+    let divTileCol0Row1 = document.createElement("div");
+    divTileCol0Row1.setAttribute("class", "tile is-child box");
+    let pCol0Row1 = document.createElement("p");
+    pCol0Row1.setAttribute("class", "");
+    //row3
+    let divTileCol0Row2 = document.createElement("div");
+    divTileCol0Row2.setAttribute("class", "tile is-child box");
+    let pCol0Row2 = document.createElement("p");
+    pCol0Row2.setAttribute("class", "");
+
+    divTileCol0Row0.appendChild(pCol0Row0);
+    divTileCol0Row1.appendChild(pCol0Row1);
+    divTileCol0Row2.appendChild(pCol0Row2);
+
+    //
+    //column2
+    let divTileCol1 = document.createElement("div");
+    divTileCol1.setAttribute("class", "tile is-4 is-vertical is-parent");
+
+    //row1
+    let divTileCol1Row0 = document.createElement("div");
+    divTileCol1Row0.setAttribute("class", "tile is-child box");
+    let pCol1Row0 = document.createElement("p");
+    pCol1Row0.setAttribute("class", "");
+    //row2
+    let divTileCol1Row1 = document.createElement("div");
+    divTileCol1Row1.setAttribute("class", "tile is-child box");
+    let pCol1Row1 = document.createElement("p");
+    pCol1Row1.setAttribute("class", "");
+    //row3
+    let divTileCol1Row2 = document.createElement("div");
+    divTileCol1Row2.setAttribute("class", "tile is-child box");
+    let pCol1Row2 = document.createElement("p");
+    pCol1Row2.setAttribute("class", "");
+
+    //column3
+    let divTileCol2 = document.createElement("div");
+    divTileCol2.setAttribute("class", "tile is-4 is-vertical is-parent");
+
+    //row1
+    let divTileCol2Row0 = document.createElement("div");
+    divTileCol2Row0.setAttribute("class", "tile is-child box");
+    let pCol2Row0 = document.createElement("p");
+    pCol2Row0.setAttribute("class", "");
+    //row2
+    let divTileCol2Row1 = document.createElement("div");
+    divTileCol2Row1.setAttribute("class", "tile is-child box");
+    let pCol2Row1 = document.createElement("p");
+    pCol2Row1.setAttribute("class", "");
+    //row3
+    let divTileCol2Row2 = document.createElement("div");
+    divTileCol2Row2.setAttribute("class", "tile is-child box");
+    let pCol2Row2 = document.createElement("p");
+    pCol2Row2.setAttribute("class", "");
+
+    //connecting all the divs and p elements
+    divTileCol0Row0.appendChild(pCol0Row0);
+    divTileCol0Row1.appendChild(pCol0Row1);
+    divTileCol0Row2.appendChild(pCol0Row2);
+
+    divTileCol1Row0.appendChild(pCol1Row0);
+    divTileCol1Row1.appendChild(pCol1Row1);
+    divTileCol1Row2.appendChild(pCol1Row2);
+
+    divTileCol2Row0.appendChild(pCol2Row0);
+    divTileCol2Row1.appendChild(pCol2Row1);
+    divTileCol2Row2.appendChild(pCol2Row2);
+
+    divTileCol0.appendChild(divTileCol0Row0);
+    divTileCol0.appendChild(divTileCol0Row1);
+    divTileCol0.appendChild(divTileCol0Row2);
+    divTileCol1.appendChild(divTileCol1Row0);
+    divTileCol1.appendChild(divTileCol1Row1);
+    divTileCol1.appendChild(divTileCol1Row2);
+    divTileCol2.appendChild(divTileCol2Row0);
+    divTileCol2.appendChild(divTileCol2Row1);
+    divTileCol2.appendChild(divTileCol2Row2);
+
+    divTileAncestor.appendChild(divTileCol0);
+    divTileAncestor.appendChild(divTileCol1);
+    divTileAncestor.appendChild(divTileCol2);
+
+    document.getElementById("body").appendChild(divTileAncestor);
+  }
+
+  scorePanelToHtml() {}
+  getGameFromStorage() {}
+  setGameInStorage() {}
+}
+
 const init = () => {
   const player1 = new Player("sterre", "X");
   const player2 = new Player("reeven", "O");
-  const game = new TicTacToe(player1, player2);
-  const players = [player1, player2];
-  let divBody = document.getElementById("body");
-
-  let divScore = document.createElement("div");
-  let pElement = document.createElement("div");
-  players.forEach(player => {
-    let scoreText = document.createTextNode(
-      `The score of ${player.name} = ${player.score}`
-    );
-    pElement.append(scoreText);
-  });
-  divScore.append(pElement);
-  divBody.append(divScore);
-
+  new TicTacToeComponent(this, player1, player2).boardToHtml();
   // console.table(game.board);
   // game.gameOver();
 };
