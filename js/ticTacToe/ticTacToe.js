@@ -163,42 +163,23 @@ class TicTacToeComponent {
     this._storage = window.localStorage;
     this._game = new TicTacToe(player1, player2);
   }
-  get storage() {
-    return this._storage;
+  //setters
+  set game(value) {
+    this._game = value;
   }
   set storage(value) {
     this._storage = value;
   }
-  // const players = [player1, player2];
-  // let divBody = document.getElementById("body");
+  //getters
+  get storage() {
+    return this._storage;
+  }
+  get game() {
+    return this._game;
+  }
 
-  // let divScore = document.createElement("div");
-  // let pElement = document.createElement("div");
-  // players.forEach(player => {
-  //   let scoreText = document.createTextNode(
-  //     `The score of ${player.name} = ${player.score}`
-  //   );
-  //   pElement.appendChild(scoreText);
-  // });
-  // divScore.append(pElement);
-  // divBody.append(divScore);
   boardToHtml() {
     document.getElementById("body").innerHTML = "";
-
-    // generates for each row a div with a columns attribute
-    // and for each element in that row a div with a is-one-third attribute
-    //
-    // this._game.board.forEach(row => {
-    //   const divElementRow1 = document.createElement("div");
-    //   divElementRow1.setAttribute("class", "tile is-parent");
-    //   row.forEach(element => {
-    //     const divElementRow1Column1 = document.createElement("article");
-    //     divElementRow1Column1.setAttribute("class", "tile is-child notification is-warning");
-    //     divElementRow1Column1.appendChild(document.createTextNode("X"))
-    //     divElementRow1.appendChild(divElementRow1Column1);
-    //   });
-    //   document.getElementById("body").appendChild(divElementRow1);
-    // });
 
     // is-ancestor element
     let divTileAncestor = document.createElement("div");
