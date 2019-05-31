@@ -186,8 +186,7 @@ class TicTacToeComponent {
 
   boardToHtml() {
     document.getElementById("body").innerHTML = "";
-    let divBody = document.getElementById("body");
-    divBody.setAttribute("class", "is-dark container")
+
     // is-ancestor element
     const divTileAncestor = document.createElement("div");
     divTileAncestor.setAttribute("class", "tile is-ancestor");
@@ -291,6 +290,9 @@ class TicTacToeComponent {
     divTileAncestor.appendChild(divTileCol2);
 
     document.getElementById("body").appendChild(divTileAncestor);
+    document
+      .getElementById("body")
+      .setAttribute("class", "is-black has-text-centered container");
   }
 
   scorePanelToHtml() {}
@@ -299,6 +301,8 @@ class TicTacToeComponent {
 }
 
 const init = () => {
+  document.title = "TicTacToe";
+  
   const player1 = new Player("sterre", "X");
   const player2 = new Player("reeven", "O");
   new TicTacToeComponent(this, player1, player2).boardToHtml();
