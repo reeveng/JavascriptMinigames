@@ -110,8 +110,8 @@ class TicTacToe {
       player.score++;
     } else if (this.isEqual()) {
       alert(`Sadly this game is a draw!`);
-    } else {
-    }
+    } // else {
+    // }
   }
 
   isEqual() {
@@ -158,11 +158,11 @@ function checkFirstPlayerInArray(array, player1, player2) {
   }
 }
 
-function setAttributes(element, arrayOfAttributes) {
-  for (var key in arrayOfAttributes) {
-    element.setAttribute(key, arrayOfAttributes[key]);
-  }
-}
+// function setAttributes(element, arrayOfAttributes) {
+//   for (var key in arrayOfAttributes) {
+//     element.setAttribute(key, arrayOfAttributes[key]);
+//   }
+// }
 
 class TicTacToeComponent {
   constructor(window, player1, player2) {
@@ -302,7 +302,7 @@ class TicTacToeComponent {
 
 const init = () => {
   document.title = "TicTacToe";
-  
+
   const player1 = new Player("sterre", "X");
   const player2 = new Player("reeven", "O");
   new TicTacToeComponent(this, player1, player2).boardToHtml();
