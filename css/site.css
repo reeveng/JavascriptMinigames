@@ -9,7 +9,7 @@
 }
 
  */
- :root {
+:root {
   --background: url("../images/backgroundpattern.png");
 }
 body {
@@ -18,7 +18,9 @@ body {
   background-image: var(--background),
     linear-gradient(to right, #38ef7d, #11998e); /* Chrome 10-25, Safari 5.1-6 */
 }
-
+html {
+  overflow: hidden;
+}
 html,
 body {
   height: 100%; /*both html and body*/

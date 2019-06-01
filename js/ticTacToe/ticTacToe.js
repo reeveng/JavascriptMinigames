@@ -185,10 +185,10 @@ class TicTacToeComponent {
   }
 
   boardToHtml() {
-    document.getElementById("body").innerHTML = "";
+    document.getElementById("main").innerHTML = "";
     const divInBodyDiv = document.createElement("div");
     divInBodyDiv.setAttribute("id", "ticTacToe");
-    document.getElementById("body").appendChild(divInBodyDiv);
+    document.getElementById("main").appendChild(divInBodyDiv);
 
     // is-ancestor element
     const divTileAncestor = document.createElement("div");
