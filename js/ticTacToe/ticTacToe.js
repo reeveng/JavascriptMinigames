@@ -42,6 +42,7 @@ class TicTacToe {
     this._player1 = player1;
     this._player2 = player2;
     this._board = [["h", "e", "y"], ["b", "e", "n"], ["j", "i", "j"]];
+    this._wonPlayer = null;
   }
   //setters
   set board(value) {
@@ -52,6 +53,9 @@ class TicTacToe {
   }
   set player1(value) {
     this._player1 = value;
+  }
+  set wonPlayer(value) {
+    this._wonPlayer = value;
   }
 
   //getters
@@ -64,14 +68,17 @@ class TicTacToe {
   get board() {
     return this._board;
   }
+  get wonPlayer() {
+    return this._wonPlayer;
+  }
 
   hasWon() {
     let row = [];
     let column = [];
     let diagonalArray1 = [];
     let diagonalArray2 = [];
-    let p1 = null,
-      p2 = null;
+    let p1 = null;
+    let p2 = null;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         row[j] = this._board[i][j];
@@ -80,11 +87,14 @@ class TicTacToe {
 
       p1 = checkWithArrayIfGameWon(row, this._player1, this._player2);
       p2 = checkWithArrayIfGameWon(column, this._player1, this._player2);
-      if (p1 != null) {
-        return p1;
-      }
-      if (p2 != null) {
-        return p2;
+      if (p1 != null || p2 != null) {
+        if (p1 != null) {
+          this._wonPlayer = p1;
+        }
+        if (p2 != null) {
+          this._wonPlayer = p2;
+        }
+        return true;
       }
     }
     diagonalArray1[0] = this._board[0][0];
@@ -95,12 +105,16 @@ class TicTacToe {
     diagonalArray2[1] = this._board[1][1];
     diagonalArray2[2] = this._board[2][0];
     p2 = checkWithArrayIfGameWon(diagonalArray2, this._player1, this._player2);
-    if (p1 != null) {
-      return p1;
-    }
-    if (p2 != null) {
-      return p2;
-    }
+
+    if (p1 != null || p2 != null) {
+      if (p1 != null) {
+        this._wonPlayer = p1;
+      }
+      if (p2 != null) {
+        this._wonPlayer = p2;
+      }
+      return true;
+    } else return false;
   }
 
   gameOver() {
@@ -158,6 +172,16 @@ function checkFirstPlayerInArray(array, player1, player2) {
   }
 }
 
+function correctFormatOfSymbol(player1Symbol, player2Symbol) {
+  player1Symbol = player1Symbol.split("");
+  if (player1Symbol != null || player1Symbol !== "")
+    player1Symbol = player1Symbol[0].toUpperCase();
+  player2Symbol = player2Symbol.split("");
+  if (player2Symbol != null || player2Symbol !== "")
+    player2Symbol = player2Symbol[0].toUpperCase();
+  return [player1Symbol, player2Symbol];
+}
+
 // function setAttributes(element, arrayOfAttributes) {
 //   for (var key in arrayOfAttributes) {
 //     element.setAttribute(key, arrayOfAttributes[key]);
@@ -168,6 +192,7 @@ class TicTacToeComponent {
   constructor(window, player1, player2) {
     this._storage = window.localStorage;
     this._game = new TicTacToe(player1, player2);
+    this.boardToHtml();
   }
   //setters
   set game(value) {
@@ -182,6 +207,9 @@ class TicTacToeComponent {
   }
   get game() {
     return this._game;
+  }
+  get hasWon() {
+    return this._game.hasWon();
   }
 
   boardToHtml() {
@@ -202,19 +230,22 @@ class TicTacToeComponent {
     const divTileCol0Row0 = document.createElement("div");
     divTileCol0Row0.setAttribute("class", "tile is-child box");
     const pCol0Row0 = document.createElement("p");
-    pCol0Row0.setAttribute("class", "has-text-centered");
+    pCol0Row0.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol0Row0.setAttribute("id", "col0row0");
     pCol0Row0.appendChild(document.createTextNode(`${this._game.board[0][0]}`));
     //row2
     const divTileCol0Row1 = document.createElement("div");
     divTileCol0Row1.setAttribute("class", "tile is-child box");
     const pCol0Row1 = document.createElement("p");
-    pCol0Row1.setAttribute("class", "has-text-centered");
+    pCol0Row1.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol0Row1.setAttribute("id", "col0row1");
     pCol0Row1.appendChild(document.createTextNode(`${this._game.board[1][0]}`));
     //row3
     const divTileCol0Row2 = document.createElement("div");
     divTileCol0Row2.setAttribute("class", "tile is-child box");
     const pCol0Row2 = document.createElement("p");
-    pCol0Row2.setAttribute("class", "has-text-centered");
+    pCol0Row2.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol0Row2.setAttribute("id", "col0row2");
     pCol0Row2.appendChild(document.createTextNode(`${this._game.board[2][0]}`));
 
     divTileCol0Row0.appendChild(pCol0Row0);
@@ -230,19 +261,22 @@ class TicTacToeComponent {
     const divTileCol1Row0 = document.createElement("div");
     divTileCol1Row0.setAttribute("class", "tile is-child box");
     const pCol1Row0 = document.createElement("p");
-    pCol1Row0.setAttribute("class", "has-text-centered");
+    pCol1Row0.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol1Row0.setAttribute("id", "col1row0");
     pCol1Row0.appendChild(document.createTextNode(`${this._game.board[0][1]}`));
     //row2
     const divTileCol1Row1 = document.createElement("div");
     divTileCol1Row1.setAttribute("class", "tile is-child box");
     const pCol1Row1 = document.createElement("p");
-    pCol1Row1.setAttribute("class", "has-text-centered");
+    pCol1Row1.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol1Row1.setAttribute("id", "col1row1");
     pCol1Row1.appendChild(document.createTextNode(`${this._game.board[1][1]}`));
     //row3
     const divTileCol1Row2 = document.createElement("div");
     divTileCol1Row2.setAttribute("class", "tile is-child box");
     const pCol1Row2 = document.createElement("p");
-    pCol1Row2.setAttribute("class", "has-text-centered");
+    pCol1Row2.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol1Row2.setAttribute("id", "col1row2");
     pCol1Row2.appendChild(document.createTextNode(`${this._game.board[2][1]}`));
 
     divTileCol1Row0.appendChild(pCol1Row0);
@@ -258,19 +292,22 @@ class TicTacToeComponent {
     const divTileCol2Row0 = document.createElement("div");
     divTileCol2Row0.setAttribute("class", "tile is-child box");
     const pCol2Row0 = document.createElement("p");
-    pCol2Row0.setAttribute("class", "has-text-centered");
+    pCol2Row0.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol2Row0.setAttribute("id", "col2row0");
     pCol2Row0.appendChild(document.createTextNode(`${this._game.board[0][2]}`));
     //row2
     const divTileCol2Row1 = document.createElement("div");
     divTileCol2Row1.setAttribute("class", "tile is-child box");
     const pCol2Row1 = document.createElement("p");
-    pCol2Row1.setAttribute("class", "has-text-centered");
+    pCol2Row1.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol2Row1.setAttribute("id", "col2row1");
     pCol2Row1.appendChild(document.createTextNode(`${this._game.board[1][2]}`));
     //row3
     const divTileCol2Row2 = document.createElement("div");
     divTileCol2Row2.setAttribute("class", "tile is-child box");
     const pCol2Row2 = document.createElement("p");
-    pCol2Row2.setAttribute("class", "has-text-centered");
+    pCol2Row2.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol2Row2.setAttribute("id", "col2row2");
     pCol2Row2.appendChild(document.createTextNode(`${this._game.board[2][2]}`));
 
     divTileCol2Row0.appendChild(pCol2Row0);
@@ -293,7 +330,10 @@ class TicTacToeComponent {
     divTileAncestor.appendChild(divTileCol2);
 
     divInBodyDiv.appendChild(divTileAncestor);
-    divInBodyDiv.setAttribute("class", "is-black has-text-centered container");
+    divInBodyDiv.setAttribute(
+      "class",
+      "is-black has-text-centered title container"
+    );
   }
 
   scorePanelToHtml() {}
@@ -303,11 +343,95 @@ class TicTacToeComponent {
 
 const init = () => {
   document.title = "TicTacToe";
-
-  const player1 = new Player("sterre", "X");
-  const player2 = new Player("reeven", "O");
-  new TicTacToeComponent(this, player1, player2).boardToHtml();
-  // console.table(game.board);
-  // game.gameOver();
+  document.getElementById("player1Name").value = "sterre";
+  document.getElementById("player2Name").value = "reeven";
+  document.getElementById("player1Symbol").value = "X";
+  document.getElementById("player2Symbol").value = "o";
+  startGame();
 };
+
+function continueGame(ticTacToe) {
+  hasWon = ticTacToe.game.hasWon();
+  while (!hasWon) {
+    console.log();
+    document.getElementById("col0row0").onclick = () => {
+      //working here!
+    };
+    // pCol0Row0.setAttribute("id", "col0row0");
+    break;
+  }
+}
+
+function startGame() {
+  document.getElementById("startButton").onclick = function() {
+    const player1Name = document.getElementById("player1Name").value;
+    const player2Name = document.getElementById("player2Name").value;
+    let player1Symbol = document.getElementById("player1Symbol").value;
+    let player2Symbol = document.getElementById("player2Symbol").value;
+
+    if (
+      player1Name == null ||
+      player1Name == "" ||
+      player1Name === undefined ||
+      (player1Symbol == null ||
+        player1Symbol == "" ||
+        player1Symbol === undefined) ||
+      (player2Name == null || player2Name == "" || player2Name === undefined) ||
+      (player2Symbol == null ||
+        player2Symbol == "" ||
+        player2Symbol === undefined)
+    ) {
+      let str = "";
+      if (player1Name == null || player1Name == "") {
+        str += "Player 1 name is required\n";
+      }
+
+      if (player1Symbol == null || player1Symbol == "") {
+        str += "Player 1 symbol is required\n";
+      }
+
+      if (player2Name == null || player2Name == "") {
+        str += "Player 2 name is required\n";
+      }
+
+      if (player2Symbol == null || player2Symbol == "") {
+        str += "Player 2 symbol is required\n";
+      }
+      alert(str);
+    } else if (player1Symbol === player2Symbol) {
+      const correctPlayerSymbols = correctFormatOfSymbol(
+        player1Symbol,
+        player2Symbol
+      );
+      player1Symbol = correctPlayerSymbols[0];
+      player1Symbol = correctPlayerSymbols[1];
+
+      let str = "";
+      str += `The player symbols need to be different:\n
+      player1's symbol: ${player1Symbol}\n
+      player2's symbol: ${player1Symbol}\n`;
+      alert(str);
+    } else if (player1Name === player2Name) {
+      let str = "";
+      str += `The player names need to be different:\n
+      player1's name: ${player1Name}\n
+      player2's name: ${player2Name}\n`;
+      alert(str);
+    } else {
+      const correctPlayerSymbols = correctFormatOfSymbol(
+        player1Symbol,
+        player2Symbol
+      );
+      player1Symbol = correctPlayerSymbols[0];
+      player1Symbol = correctPlayerSymbols[1];
+
+      const player1 = new Player(player1Name, player1Symbol);
+      const player2 = new Player(player2Name, player2Symbol);
+
+      const ticTacToe = new TicTacToeComponent(this, player1, player2);
+      continueGame(ticTacToe);
+    }
+  };
+}
+
 window.onload = init;
