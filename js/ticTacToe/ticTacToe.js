@@ -186,6 +186,9 @@ class TicTacToeComponent {
 
   boardToHtml() {
     document.getElementById("body").innerHTML = "";
+    const divInBodyDiv = document.createElement("div");
+    divInBodyDiv.setAttribute("id", "ticTacToe");
+    document.getElementById("body").appendChild(divInBodyDiv);
 
     // is-ancestor element
     const divTileAncestor = document.createElement("div");
@@ -289,10 +292,8 @@ class TicTacToeComponent {
     divTileAncestor.appendChild(divTileCol1);
     divTileAncestor.appendChild(divTileCol2);
 
-    document.getElementById("body").appendChild(divTileAncestor);
-    document
-      .getElementById("body")
-      .setAttribute("class", "is-black has-text-centered container");
+    divInBodyDiv.appendChild(divTileAncestor);
+    divInBodyDiv.setAttribute("class", "is-black has-text-centered container");
   }
 
   scorePanelToHtml() {}
