@@ -7,6 +7,8 @@
 - 2048
 - 4 on a row
 - more complex games
+- ta yu
+
 
 ## Interesting Repositories:
 - https://github.com/daneden/animate.css
