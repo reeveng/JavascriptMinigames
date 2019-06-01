@@ -9,3 +9,25 @@
 }
 
  */
+
+body {
+  background: #11998e; /* fallback for old browsers */
+  background-image: url("../images/backgroundpattern.png");
+  background-image: url("../images/backgroundpattern.png"),
+    linear-gradient(to right, #38ef7d, #11998e); /* Chrome 10-25, Safari 5.1-6 */
+  background-image: url("../images/backgroundpattern.png"),
+    linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+html,
+body {
+  height: 100%; /*both html and body*/
+}
+body {
+  margin: 0; /*reset default margin*/
+}
+
+.center-text {
+  text-align: center;
+  width: 100%;
+}
