@@ -33,3 +33,9 @@ body {
   text-align: center;
   width: 100%;
 }
+
+.darkGrayOnHover:hover {
+  background-color: gray;
+  color: whitesmoke;
+  min-height: 50px;
+}
