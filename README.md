@@ -19,5 +19,5 @@
 1. git clone
 2. open terminal
 3. go inside the project folder and write "code ."
-4. open terminal in e.g. "visual studio code"
+4. open terminal in "visual studio code"
 5. write "npm i"
