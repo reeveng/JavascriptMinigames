@@ -84,6 +84,10 @@ class TicTacToe {
 
   resetBoard() {
     this._board = [["", "", ""], ["", "", ""], ["", "", ""]];
+    this._turn =
+      (this._player1.score + this._player2.score) % 2
+        ? this._player2
+        : this._player1;
   }
 
   hasWon() {
@@ -136,11 +140,15 @@ class TicTacToe {
       if (this._wonPlayer != null) {
         alert(`${this._wonPlayer.name} is the winner!`);
         this._wonPlayer.score++;
+        return true;
       }
     } else if (this.isEqual()) {
       alert(`Sadly this game is a draw!`);
-    } // else {
-    // }
+      return true;
+    } else {
+      false;
+    }
+    return false;
   }
 
   isEqual() {
@@ -187,21 +195,17 @@ function checkFirstPlayerInArray(array, player1, player2) {
   }
 }
 
-function correctFormatOfSymbol(player1Symbol, player2Symbol) {
+function correctFormatOfSymbol(player1S, player2S) {
+  let player1Symbol = player1S;
+  let player2Symbol = player2S;
+
   player1Symbol = player1Symbol.split("");
-  if (player1Symbol != null || player1Symbol !== "")
-    player1Symbol = player1Symbol[0].toUpperCase();
+  player1Symbol = player1Symbol[0].toUpperCase();
   player2Symbol = player2Symbol.split("");
-  if (player2Symbol != null || player2Symbol !== "")
-    player2Symbol = player2Symbol[0].toUpperCase();
+  player2Symbol = player2Symbol[0].toUpperCase();
+
   return [player1Symbol, player2Symbol];
 }
-
-// function setAttributes(element, arrayOfAttributes) {
-//   for (var key in arrayOfAttributes) {
-//     element.setAttribute(key, arrayOfAttributes[key]);
-//   }
-// }
 
 class TicTacToeComponent {
   constructor(window, player1, player2) {
@@ -363,6 +367,16 @@ class TicTacToeComponent {
   scorePanelToHtml() {}
   getGameFromStorage() {}
   setGameInStorage() {}
+
+  newGame(player1, player2) {
+    this._game = new TicTacToe(player2, player1);
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        document.getElementById(`col${i}row${j}`).innerHTML = "";
+        document.getElementById(`col${j}row${i}`).innerHTML = "";
+      }
+    }
+  }
 }
 
 const init = () => {
@@ -414,7 +428,7 @@ function continueGame(ticTacToe) {
 }
 
 function gotClicked(id, ticTacToe) {
-  let clicked = document.getElementById(`${id}`).value;
+  let clicked = document.getElementById(`${id}`).innerHTML;
   if (clicked == undefined || clicked == null || clicked == "") {
     let splittedId = id.split("");
     splittedId = splittedId.filter(function(item) {
@@ -422,16 +436,24 @@ function gotClicked(id, ticTacToe) {
     });
     ticTacToe.game.board[splittedId[1]][splittedId[0]] =
       ticTacToe.game.turn.symbol;
-    ticTacToe.boardToHtml();
+
+    document.getElementById(`${id}`).innerHTML = `${
+      ticTacToe.game.turn.symbol
+    }`;
+
+    // ticTacToe.boardToHtml();
     player =
       ticTacToe.game.players[0] != ticTacToe.game.turn
-        ? ticTacToe.game.players[1]
+        ? ticTacToe.game.players[0]
         : ticTacToe.game.players[1];
     ticTacToe.game.turn = player;
-    ticTacToe.game.gameOver();
-    if (ticTacToe.game.hasWon() == true) {
-      ticTacToe.game.resetBoard();
-      ticTacToe.boardToHtml();
+    let gameOver = ticTacToe.game.gameOver();
+    if (gameOver) {
+      console.log(gameOver);
+      window.setTimeout(
+        ticTacToe.newGame(ticTacToe.game.player1, ticTacToe.game.player2),
+        10500
+      );
     }
   } else {
     alert(`Click a field that hasn't been clicked yet`);
@@ -474,38 +496,31 @@ function startGame() {
         str += "Player 2 symbol is required\n";
       }
       alert(str);
-    } else if (player1Symbol === player2Symbol) {
-      const correctPlayerSymbols = correctFormatOfSymbol(
-        player1Symbol,
-        player2Symbol
-      );
-      player1Symbol = correctPlayerSymbols[0];
-      player1Symbol = correctPlayerSymbols[1];
-
-      let str = "";
-      str += `The player symbols need to be different:\n
-      player1's symbol: ${player1Symbol}\n
-      player2's symbol: ${player1Symbol}\n`;
-      alert(str);
-    } else if (player1Name === player2Name) {
-      let str = "";
-      str += `The player names need to be different:\n
-      player1's name: ${player1Name}\n
-      player2's name: ${player2Name}\n`;
-      alert(str);
     } else {
       const correctPlayerSymbols = correctFormatOfSymbol(
         player1Symbol,
         player2Symbol
       );
-      player1Symbol = correctPlayerSymbols[0];
-      player1Symbol = correctPlayerSymbols[1];
 
-      const player1 = new Player(player1Name, player1Symbol);
-      const player2 = new Player(player2Name, player2Symbol);
+      if (correctPlayerSymbols[0] == correctPlayerSymbols[1]) {
+        let str = "";
+        str += `The player symbols need to be different:\n
+      player1's symbol: ${player1Symbol}\n
+      player2's symbol: ${player1Symbol}\n`;
+        alert(str);
+      } else if (player1Name == player2Name) {
+        let str = "";
+        str += `The player names need to be different:\n
+      player1's name: ${player1Name}\n
+      player2's name: ${player2Name}\n`;
+        alert(str);
+      } else {
+        const player1 = new Player(player1Name, player1Symbol);
+        const player2 = new Player(player2Name, player2Symbol);
 
-      const ticTacToe = new TicTacToeComponent(this, player1, player2);
-      continueGame(ticTacToe);
+        const ticTacToe = new TicTacToeComponent(this, player1, player2);
+        window.setInterval(continueGame(ticTacToe), 500);
+      }
     }
   };
 }
