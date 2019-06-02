@@ -381,10 +381,6 @@ class TicTacToeComponent {
 
 const init = () => {
   document.title = "TicTacToe";
-  document.getElementById("player1Name").value = "sterre";
-  document.getElementById("player2Name").value = "reeven";
-  document.getElementById("player1Symbol").value = "X";
-  document.getElementById("player2Symbol").value = "o";
   startGame();
 };
 
