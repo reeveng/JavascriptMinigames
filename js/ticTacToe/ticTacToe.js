@@ -82,6 +82,10 @@ class TicTacToe {
     return this._turn;
   }
 
+  resetBoard() {
+    this._board = [["", "", ""], ["", "", ""], ["", "", ""]];
+  }
+
   hasWon() {
     let row = [];
     let column = [];
@@ -239,26 +243,26 @@ class TicTacToeComponent {
 
     //row1
     const divTileCol0Row0 = document.createElement("div");
-    divTileCol0Row0.setAttribute("class", "tile is-child box");
+    divTileCol0Row0.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol0Row0.setAttribute("id", "divTileCol0Row0");
     const pCol0Row0 = document.createElement("p");
-    pCol0Row0.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol0Row0.setAttribute("class", "has-text-centered title vertical-center ");
     pCol0Row0.setAttribute("id", "col0row0");
     pCol0Row0.appendChild(document.createTextNode(`${this._game.board[0][0]}`));
     //row2
     const divTileCol0Row1 = document.createElement("div");
-    divTileCol0Row1.setAttribute("class", "tile is-child box");
+    divTileCol0Row1.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol0Row1.setAttribute("id", "divTileCol0Row1");
     const pCol0Row1 = document.createElement("p");
-    pCol0Row1.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol0Row1.setAttribute("class", "has-text-centered title vertical-center ");
     pCol0Row1.setAttribute("id", "col0row1");
     pCol0Row1.appendChild(document.createTextNode(`${this._game.board[1][0]}`));
     //row3
     const divTileCol0Row2 = document.createElement("div");
-    divTileCol0Row2.setAttribute("class", "tile is-child box");
+    divTileCol0Row2.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol0Row2.setAttribute("id", "divTileCol0Row2");
     const pCol0Row2 = document.createElement("p");
-    pCol0Row2.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol0Row2.setAttribute("class", "has-text-centered title vertical-center ");
     pCol0Row2.setAttribute("id", "col0row2");
     pCol0Row2.appendChild(document.createTextNode(`${this._game.board[2][0]}`));
 
@@ -273,26 +277,26 @@ class TicTacToeComponent {
 
     //row1
     const divTileCol1Row0 = document.createElement("div");
-    divTileCol1Row0.setAttribute("class", "tile is-child box");
+    divTileCol1Row0.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol1Row0.setAttribute("id", "divTileCol1Row0");
     const pCol1Row0 = document.createElement("p");
-    pCol1Row0.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol1Row0.setAttribute("class", "has-text-centered title vertical-center ");
     pCol1Row0.setAttribute("id", "col1row0");
     pCol1Row0.appendChild(document.createTextNode(`${this._game.board[0][1]}`));
     //row2
     const divTileCol1Row1 = document.createElement("div");
-    divTileCol1Row1.setAttribute("class", "tile is-child box");
+    divTileCol1Row1.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol1Row1.setAttribute("id", "divTileCol1Row1");
     const pCol1Row1 = document.createElement("p");
-    pCol1Row1.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol1Row1.setAttribute("class", "has-text-centered title vertical-center ");
     pCol1Row1.setAttribute("id", "col1row1");
     pCol1Row1.appendChild(document.createTextNode(`${this._game.board[1][1]}`));
     //row3
     const divTileCol1Row2 = document.createElement("div");
-    divTileCol1Row2.setAttribute("class", "tile is-child box");
+    divTileCol1Row2.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol1Row2.setAttribute("id", "divTileCol1Row2");
     const pCol1Row2 = document.createElement("p");
-    pCol1Row2.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol1Row2.setAttribute("class", "has-text-centered title vertical-center ");
     pCol1Row2.setAttribute("id", "col1row2");
     pCol1Row2.appendChild(document.createTextNode(`${this._game.board[2][1]}`));
 
@@ -307,26 +311,26 @@ class TicTacToeComponent {
 
     //row1
     const divTileCol2Row0 = document.createElement("div");
-    divTileCol2Row0.setAttribute("class", "tile is-child box");
+    divTileCol2Row0.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol2Row0.setAttribute("id", "divTileCol2Row0");
     const pCol2Row0 = document.createElement("p");
-    pCol2Row0.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol2Row0.setAttribute("class", "has-text-centered title vertical-center ");
     pCol2Row0.setAttribute("id", "col2row0");
     pCol2Row0.appendChild(document.createTextNode(`${this._game.board[0][2]}`));
     //row2
     const divTileCol2Row1 = document.createElement("div");
-    divTileCol2Row1.setAttribute("class", "tile is-child box");
+    divTileCol2Row1.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol2Row1.setAttribute("id", "divTileCol2Row1");
     const pCol2Row1 = document.createElement("p");
-    pCol2Row1.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol2Row1.setAttribute("class", "has-text-centered title vertical-center ");
     pCol2Row1.setAttribute("id", "col2row1");
     pCol2Row1.appendChild(document.createTextNode(`${this._game.board[1][2]}`));
     //row3
     const divTileCol2Row2 = document.createElement("div");
-    divTileCol2Row2.setAttribute("class", "tile is-child box");
+    divTileCol2Row2.setAttribute("class", "tile is-child box darkGrayOnHover");
     divTileCol2Row2.setAttribute("id", "divTileCol2Row2");
     const pCol2Row2 = document.createElement("p");
-    pCol2Row2.setAttribute("class", "has-text-centered title darkGrayOnHover");
+    pCol2Row2.setAttribute("class", "has-text-centered title vertical-center ");
     pCol2Row2.setAttribute("id", "col2row2");
     pCol2Row2.appendChild(document.createTextNode(`${this._game.board[2][2]}`));
 
@@ -371,7 +375,6 @@ const init = () => {
 };
 
 function continueGame(ticTacToe) {
-  // divTileCol2Row0.setAttribute("id", "divTileCol2Row0");
   document.getElementById("divTileCol0Row0").onclick = () => {
     id = "col0row0";
     gotClicked(id, ticTacToe);
@@ -413,22 +416,23 @@ function continueGame(ticTacToe) {
 function gotClicked(id, ticTacToe) {
   let clicked = document.getElementById(`${id}`).value;
   if (clicked == undefined || clicked == null || clicked == "") {
-    console.log("hey");
-    clicked = `${ticTacToe.game.turn.symbol}`;
-    console.log(ticTacToe.game.turn.symbol);
     let splittedId = id.split("");
     splittedId = splittedId.filter(function(item) {
       return parseInt(item) == item;
     });
-    console.table(splittedId);
-    ticTacToe.game.board[splittedId[0]][splittedId[1]] =
+    ticTacToe.game.board[splittedId[1]][splittedId[0]] =
       ticTacToe.game.turn.symbol;
-    console.table(ticTacToe.game.board);
+    ticTacToe.boardToHtml();
     player =
       ticTacToe.game.players[0] != ticTacToe.game.turn
         ? ticTacToe.game.players[1]
         : ticTacToe.game.players[1];
     ticTacToe.game.turn = player;
+    ticTacToe.game.gameOver();
+    if (ticTacToe.game.hasWon() == true) {
+      ticTacToe.game.resetBoard();
+      ticTacToe.boardToHtml();
+    }
   } else {
     alert(`Click a field that hasn't been clicked yet`);
   }
