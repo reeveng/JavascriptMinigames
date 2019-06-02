@@ -437,7 +437,6 @@ function gotClicked(id, ticTacToe) {
       ticTacToe.game.turn.symbol
     }`;
 
-    // ticTacToe.boardToHtml();
     player =
       ticTacToe.game.players[0] != ticTacToe.game.turn
         ? ticTacToe.game.players[0]
@@ -445,7 +444,6 @@ function gotClicked(id, ticTacToe) {
     ticTacToe.game.turn = player;
     let gameOver = ticTacToe.game.gameOver();
     if (gameOver) {
-      console.log(gameOver);
       window.setTimeout(
         ticTacToe.newGame(ticTacToe.game.player1, ticTacToe.game.player2),
         10500
