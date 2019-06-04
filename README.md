@@ -8,6 +8,9 @@
 - 4 on a row
 - more complex games
 - ta yu
+- towerdefence
+- pacman like game, with continuously changing maze
+- make a messenger-like app
 
 ## Interesting Repositories:
 
