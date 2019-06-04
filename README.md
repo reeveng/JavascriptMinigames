@@ -17,7 +17,7 @@
 - https://github.com/daneden/animate.css
 - https://logomakr.com/4N7J8U
 
-## How to install
+## How to install 
 
 1. git clone
 2. open terminal
